@@ -4,3 +4,4 @@ I might still work through the code that the course works with just as practice,
 
 
 rust-analyzer needs vscode to be open to the folder of a given project in order to work on it, so this root folder can be used to produce project folders and then open those project folders in additional vscode instances
+
