@@ -84,4 +84,31 @@ fn main() {
 
     println!("{}", name);
 
+    //  Variables Challenge!
+
+    /*  At every step, think:
+
+    Whether it is best to use a mutable or immutable variable
+    What would be the appropriate data type */
+
+    /* 1. Store a person's name */
+
+    let name = "Frank";
+
+    /* 2. Use a variable to store the person's current age */
+
+    let current_age: i8= 30;
+
+    // in this one, they wanted age to be mutable based on the idea that a person's age changes over time (so this is more like a situation where this binding is linked to someone's profile that will change over time and not a static snapshot in time)
+
+    /* 3. Use a constant for number of years */
+    const NUMBER_YEARS: i8 = 10;
+
+    /* 4. Calculate the person's age in the future */
+    let future_age = current_age + NUMBER_YEARS;
+
+    // in this one, they wanted 'age' to be mutable, and then to have it += operated on rather than storing it in a new binding
+
+    /* 5. Print the name and the calculated future age */
+    println!("{} will be {} in {} years", name, future_age, NUMBER_YEARS);
 }
