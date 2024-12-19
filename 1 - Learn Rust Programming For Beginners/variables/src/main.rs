@@ -39,10 +39,23 @@ fn main() {
     let numbers = [1, 2, 3, 4, 5];
     println!("Element at index 0: {}", numbers[0]);
 
+    /*
+       Arrays can't change in size,
+       they have homogeneous element types
+       they have square brackets
+       they are accessed using "array[0..n-1]"
+    */
+
     // Compound variables - Tuples
     let person = ("Alice", 30, 5.4);
     println!("Name: {}", person.0);
     println!("Age: {}", person.1);
+
+    /*
+        tuples have round brackets
+        tuples can have different types in the elements
+        tuples are accessed using "tuple.0", "tuple.n-1"
+    */
 
     // Constants
     const PI: f32 = 3.14;
@@ -54,4 +67,21 @@ fn main() {
         they can not be shadowed like how a binding can be
         and they must have a type specified, unlike where bindings can have the compiler infer its type
     */
+
+    //string slice is a read only reference to a hard coded string literal
+
+    let greeting: &str = "Hello world";
+    println!("{}", greeting);
+
+    //a string literal is implicitly assigned the &str type
+    let name = "Frank";
+
+    //owned Strings are mutable
+    let mut name = String::from("Zenva");
+
+    name.push(' ');
+    name.push_str("Academy");
+
+    println!("{}", name);
+
 }
