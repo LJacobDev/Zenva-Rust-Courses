@@ -9,8 +9,11 @@ struct User {
     sign_in_count: u32,
 }
 
-
-
+impl User {
+    fn print_name(&self) {
+        println!("{}", self.name);
+    }
+}
 
 //There are also Tuple Structs, which can be used when the values don't need labels to make sense,
 //like with RGB colour values or XYZ location points
@@ -33,6 +36,7 @@ fn main() {
     };
 
 
+    //you don't seem to be able to access it like user["email"], an error message appears then
     println!("{} {}", user.name, user.email);
 
     fn print_user(user: &User) {
@@ -41,7 +45,10 @@ fn main() {
 
 
     print_user(&user);
-    //you don't seem to be able to access it like user["email"], an error message appears then
+
+    //using a method on the User struct
+    user.print_name();
+    
 
     let colour = Colour(255, 255, 255);
 
@@ -50,6 +57,17 @@ fn main() {
     println!("{colour:?} {point:?}");
 
     println!("{:?}", colour.1);
+
+
+
+    //format! macro to create strings
+
+    let name = "Kerber";
+    let animal = "dog";
+
+    let string_message = format!("Hi {name}, what is up {animal}?");
+
+    println!("{string_message}");
 
 }
 
