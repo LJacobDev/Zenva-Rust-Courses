@@ -47,17 +47,13 @@ fn main() {
         break;
     }
 
-
-
-
-
     //exercise:
 
     //generate fibonacci sequence looop
 
     let mut firstnumber = 0;
     let mut secondnumber = 1;
-    
+
     print!("{firstnumber} ");
     print!("{secondnumber} ");
 
@@ -68,11 +64,36 @@ fn main() {
         secondnumber = currentnumber;
     }
 
+    /*
+        this is how the instructor did it
+        this way is nice because lal the logic is in the one loop
+
+        let mut count = 0;
+        let mut a = 0;
+        let mut b = 1;
+
+        loop {
+            if count == 10 {
+                break;
+            }
+            if count == 0 {
+                println!("{}",a);
+            } else if count == 1 {
+                println!("{}", b);
+            }else {
+                let next = a+b;
+                println!("{}",next);
+                a = b;
+                b = next;
+            }
+            count += 1;
+        }
 
 
+     */
 
     //get average number from an array
-    let temperatures = [10.0, 15.0, 12.8, 13.5, 18.0, 19.0, 22.1 ];
+    let temperatures = [10.0, 15.0, 12.8, 13.5, 18.0, 19.0, 22.1];
 
     let mut sum = 0.0;
 
@@ -81,8 +102,4 @@ fn main() {
     }
     let average = sum / temperatures.len() as f64;
     println!("\n\n{average:.2}");
-
 }
-
-
-
