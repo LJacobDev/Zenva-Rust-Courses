@@ -243,3 +243,35 @@ fn main() {
     //this hashmap looks like it would be really easy to serialize into a json file
     println!("{:?}", student_grades);
 }
+
+
+// in the instructor's version, he broke this into functions that were separate from the main function so that it could be extended in the future more easily
+
+// the way he broke it into several functions gives extra practice about thinking about which arguments needed to be references, which needed to be mutable references
+
+/*
+when inserting into the student_grades hash map, I'm using &str as the key with the string data being a string literal in the code. Is there any benefit to using String::from("Keven") instead?
+
+GitHub Copilot
+Using &str (string slices) or String as keys in a HashMap each has its own benefits and trade-offs. Here's a comparison to help you decide which to use:
+
+Using &str as Keys
+
+    Performance: 
+    
+    Using &str can be more efficient because it avoids the overhead of heap allocation. String literals are stored in the binary's read-only memory, so they are very fast to access.
+
+    Lifetime Management: 
+    
+    You need to ensure that the string slices outlive the HashMap to avoid dangling references. This can sometimes complicate the code, especially if the string slices are not static.
+
+Using String as Keys
+
+    Ownership: 
+    
+    Using String means the HashMap takes ownership of the keys. This can simplify lifetime management because you don't need to worry about the keys being valid for the duration of the HashMap.
+
+    Flexibility: 
+    
+    String can be more flexible if you need to create keys dynamically at runtime, as opposed to using static string literals.
+ */
