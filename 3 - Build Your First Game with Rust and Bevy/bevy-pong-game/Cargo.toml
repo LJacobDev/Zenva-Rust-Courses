@@ -1,0 +1,8 @@
+[package]
+name = "bevy-pong-game"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# bevy 0.14.0 is being used intentionally to go along with video course, even though 0.15.0 is available
+bevy = "0.14.0"
