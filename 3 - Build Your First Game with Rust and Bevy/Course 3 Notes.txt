@@ -1,0 +1,5 @@
+This is about making a pong kind of game using Bevy which is an open source game engine that uses Rust
+
+
+I'm very interested in doing this as it would get me introduced to how to work with Bevy and how its paradigms work
+

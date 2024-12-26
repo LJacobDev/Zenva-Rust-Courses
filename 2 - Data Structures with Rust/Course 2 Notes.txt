@@ -1,0 +1,30 @@
+This course has about 11-12 videos that talk about:
+
+Built in rust data structures
+
+Vector,
+Hashmap
+
+
+data structures we will implement directly
+
+stack
+
+queue
+
+
+
+and it will talk about options and result enums a bit
+
+
+Rather than talking too deeply about the data structures in a theoretical sense, it will be more about practical use of them in rust programming to know what a good elegant solution is for a given use case rather than making cumbersome suboptimal code
+
+
+
+I've done up to the part about stacks and queues at the time of writing this line, and I wonder how are they going to be implemented?  The first thought I had was just taking a vector and using push and pop for the stack, and push and shift for a queue
+
+rust vectors do have a push and 'remove(0)' that would work in that way
+
+Now I want to see the videos and see if they do that or if they do something else that is more efficient or something like that
+
+... starting the video, the first sentence says that stacks will be implemented using vectors
