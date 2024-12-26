@@ -91,8 +91,108 @@ fn main() {
     // when I tried to insert a float it said 'expecting integer, found floating point number' so it isn't down to just a specific type like i8, i16, it seems to see the type as 'integer'
 
 
+
+
+
      /*
         HashMaps - part 2
      */
+
+
+
+     //how to iterate over a hashmap
+
+
+     //the for loop will consume / move the hashmap values if you don't use the reference borrowing here
+     for (key, value) in &populationmap {
+        println!("{key}: {value}");
+     }
+
+     for (city, population) in &populationmap {
+        println!("{city}: {population}");
+     }
+
+
+
+
+     //get an array of just the values using .values() method
+     
+     // THEY WILL APPEAR IN ARBITRARY ORDER HOWEVER 
+
+
+     println!("{:?}", populationmap.values());
+     
+     //get an array of the keys ysing hashmap.keys()
+     println!("{:?}", populationmap.keys());
+
+
+
+    // you can for loop it like this
+
+    for value in populationmap.values() {
+        println!("{}", value);
+    }
+    //it doesn't move the values when you use .values()
+    for value in populationmap.values() {
+        println!("{}", value);
+    }
+
+
+    // THIS IS A WAY TO CHECK IF AN ENTRY EXISTS, AND THEN IF IT DOES *NOT*, IT INSERTS A VALUE
+
+    // this will insert delhi into the hashmap because it doesn't exist yet,
+    // but tokyo will not be changed since it already existed
+
+    populationmap.entry("Delhi").or_insert(30000000);
+    populationmap.entry("Tokyo").or_insert(100000000);
+
+    println!("{:?}", populationmap);
+
+
+
+    // BETTER PERFORMANCE IN HASH MAPS:
+
+
+    // the keys are hashed, and sometimes the hashes create collisions where they land 'in the same bucket'
+
+    // so you can get better performance by using keys that are easy to hash efficiently, such as String, i32, usize
+
+
+    // you can also preallocate space for the hash map
+
+    let mut new_hashmap = HashMap::with_capacity(1);
+
+    new_hashmap.insert(1, 1);
+
+    println!("{:?} {} {}", new_hashmap, new_hashmap.capacity(), std::mem::size_of_val(&new_hashmap));
+    
+    new_hashmap.insert(2, 100000000);
+    new_hashmap.insert(3, 100000000);
+    new_hashmap.insert(4, 100000000);
+
+    println!("(notice that the elements are not in the order in which they were inserted) {:?} {} {}", new_hashmap, new_hashmap.capacity(), std::mem::size_of_val(&new_hashmap));
+
+
+
+    // when you preallocate 10 elements of space in the hash map, it might actually get 14
+
+    // or when I got 1000 it showed 1732 or so
+
+    // it has to do with the way the allocation algorithm works but it wasn't explained more than that
+
+    // also, when iterating over the hashmap, the elements will not necessarily appear in the same order as they were inserted
+
+    // this is because a hashmap is an unodered data structure
+
+    // the order is determined by the hashing function and how the keys are distributed across the buckets
+
+    // so the order they appear in reflects the order of how they're stored in memory
+
+
+    // IF YOU WANT TO PRESERVE THE ORDER,
+
+        // there is a 'Binary Tree Map'
+
+        // and the 'index map'
 
 }
