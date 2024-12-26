@@ -56,4 +56,46 @@ fn main() {
 
         println!("{}", random_number);
     }
+
+    /*
+       MODULES:
+
+
+       if your main.rs has these four functions:
+
+       greet()
+
+       farewell()
+
+       add()
+
+       subtract()
+
+
+       it could be better to put them into modules grouped by purpose
+
+
+       modules can be private, so that they are not available outside of the crate,
+
+       or public, which can expose the module to external code
+
+
+       so the greeting and farewell functions can go into messages.rs,
+
+       and the add / subtract ones can go in calculations.rs
+
+       they just need 'pub' put in front of each function signature to make them able to be used
+
+       then, in this file, add 'mod messages' and 'mod calculations' to enable using them
+
+       then call the functions like messages::greet(), calculations::add()
+
+    */
+
+
+    println!("{}",messages::greet("Keven"));
+    println!("{}",calculations::add(1,2));
 }
+mod messages;
+mod calculations;
+//it is possible to put mod statements anywhere in the global scope apparently, don't have to be in the top of the file
