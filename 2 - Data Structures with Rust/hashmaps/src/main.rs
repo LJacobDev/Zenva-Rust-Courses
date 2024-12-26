@@ -195,4 +195,51 @@ fn main() {
 
         // and the 'index map'
 
+
+
+
+    // Hashmaps challenge:
+
+    /*
+    
+        the keys are &str, the values are signed 32 bit integers
+
+        1. add grades for multiple students to a hashmap of grades (one per student name I think)
+        2. find a specific student's grade
+        3. Update a student's grade
+        4. Remove a student
+        5. Print all students and their grade
+    
+     */
+
+
+    // 1. Add grades for multiple students
+    let mut student_grades = HashMap::new();
+
+    student_grades.insert("Keven", 80);
+    student_grades.insert("Borop", 82);
+    student_grades.insert("Sterpheni", 68);
+    student_grades.insert("Mijesse", 99);
+
+
+    // 2.  Find a specific student's grade
+    let studentname = "Keven";
+    match student_grades.get(studentname) {
+        Some(value) => println!("{studentname}: {value}"),
+        None => println!("{studentname} not found in hashmap")
+    }
+
+    // 3. Update a student's grade
+    student_grades.insert("Keven", 81);
+
+    // 4. Remove a student
+    student_grades.remove("Borop");
+
+    // 5. Print all students and their grade
+    for (student, grade) in &student_grades {
+        println!("{student}: {grade}");
+    }
+
+    //this hashmap looks like it would be really easy to serialize into a json file
+    println!("{:?}", student_grades);
 }
