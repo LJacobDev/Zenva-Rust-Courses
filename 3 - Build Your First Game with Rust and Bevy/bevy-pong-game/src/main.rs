@@ -2,8 +2,14 @@ use bevy::prelude::*;
 mod systems;
 use systems::*;
 
-mod components;
 mod constants;
+
+mod components;
+use components::*;
+
+mod bundles;
+use bundles::*;
+
 fn main() {
     /*
        This pong game is going to have a program structure with the intention to modularize it so that it has improved organization, maintainability, and scalability
@@ -53,6 +59,6 @@ fn main() {
 
     App::new()
         .add_plugins(DefaultPlugins.set(create_window()))
-        .add_systems(Startup, (spawn_dotted_line, spawn_camera))
+        .add_systems(Startup, (spawn_dotted_line, spawn_ball, spawn_camera))
         .run();
 }

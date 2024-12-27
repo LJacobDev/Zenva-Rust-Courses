@@ -35,7 +35,7 @@ pub struct PaddleBundle {
 }
 
 impl PaddleBundle {
-    pub fn new(s: f32, y: f32) -> Self {
+    pub fn new(x: f32, y: f32) -> Self {
         Self {
             paddle: Paddle,
             shape: Shape(Vec2::new(PADDLE_HEIGHT, PADDLE_WIDTH)),
