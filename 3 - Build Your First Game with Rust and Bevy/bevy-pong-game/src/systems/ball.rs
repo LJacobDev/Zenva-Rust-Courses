@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use crate::components::*;
 use crate::constants::*;
-use crate::bundles::BallBundle;
+use crate::BallBundle;
 use bevy::sprite::MaterialMesh2dBundle;
 
 pub fn spawn_ball(
