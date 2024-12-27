@@ -52,7 +52,7 @@ fn main() {
     //the plugins being added cover functionalities like window creation, event handling, input management, rendering
 
     App::new()
-        .add_plugins(DefaultPlugins)
-        .add_systems(Startup, (spawn_camera))
+        .add_plugins(DefaultPlugins.set(create_window()))
+        .add_systems(Startup, (spawn_dotted_line, spawn_camera))
         .run();
 }
