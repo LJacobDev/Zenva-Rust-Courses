@@ -70,7 +70,8 @@ fn main() {
                 update_entity_positions.after(move_ball),
                 move_player1_paddle,
                 move_player2_paddle,
-                move_paddles,
+                move_paddles.after(move_player1_paddle),
+                handle_collisions.after(move_ball)
             ),
         )
         .run();
