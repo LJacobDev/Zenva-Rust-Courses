@@ -15,7 +15,7 @@ pub fn create_window() -> WindowPlugin {
 
 
 pub fn spawn_dotted_line(mut commands: Commands) {
-    let dot_color = Color::srgb(0.5, 1.0, 0.5);
+    let dot_color = Color::srgb(0.5, 0.5, 0.5);
     let dot_size = Vec3::new(5.0, 20.0, 1.0);
     let gap_size = 10.0;
     let num_dots = (constants::WINDOW_HEIGHT / (dot_size.y + gap_size)) as i32;

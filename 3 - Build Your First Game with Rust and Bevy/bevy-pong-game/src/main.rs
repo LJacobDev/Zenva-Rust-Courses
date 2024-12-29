@@ -59,6 +59,15 @@ fn main() {
 
     App::new()
         .add_plugins(DefaultPlugins.set(create_window()))
-        .add_systems(Startup, (spawn_dotted_line, spawn_ball, spawn_paddles, spawn_camera))
+        .add_systems(
+            Startup,
+            (spawn_dotted_line, spawn_ball, spawn_paddles, spawn_camera),
+        )
+        .add_systems(
+            Update,
+            (
+                move_ball, 
+                update_entity_positions.after(move_ball)),
+        )
         .run();
 }
