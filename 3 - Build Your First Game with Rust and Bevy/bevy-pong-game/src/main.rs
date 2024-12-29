@@ -61,7 +61,7 @@ fn main() {
         .add_plugins(DefaultPlugins.set(create_window()))
         .add_systems(
             Startup,
-            (spawn_dotted_line, spawn_ball, spawn_paddles, spawn_camera),
+            (spawn_dotted_line, spawn_ball, spawn_paddles, spawn_camera, spawn_scoreboard),
         )
         .add_systems(
             Update,
@@ -71,7 +71,7 @@ fn main() {
                 move_player1_paddle,
                 move_player2_paddle,
                 move_paddles.after(move_player1_paddle),
-                handle_collisions.after(move_ball)
+                handle_collisions.after(move_ball),
             ),
         )
         .run();
