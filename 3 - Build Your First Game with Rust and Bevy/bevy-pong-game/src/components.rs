@@ -37,7 +37,7 @@ pub struct Velocity(pub Vec2);
 #[derive(Component)]
 pub struct Shape(pub Vec2);    //to store the size of an entity in 2d space
 
-#[derive(Component)]
+#[derive(Event)]
 pub struct Scored(pub Scorer);    //this is used to create events indicating that a player has scored
 
 #[derive(Resource, Default)]

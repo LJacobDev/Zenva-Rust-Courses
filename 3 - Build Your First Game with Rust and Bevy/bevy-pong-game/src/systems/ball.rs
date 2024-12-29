@@ -44,3 +44,27 @@ pub fn update_entity_positions(
         transform.translation = position.0.extend(0.);
     }
 }
+
+
+pub fn detect_scoring(
+    mut ball_query: Query<&mut Position, With<Ball>>,
+    window_query: Query<&Window>,
+    mut score_event_write: EventWriter<Scored>,
+){
+    let window = match window_query.get_single(){
+        Ok(w) => w,
+        Err(_) => return,
+    };
+
+    let half_window_width = window.resolution.width() / 2.0;
+    let ball_position = match ball_query.get_single_mut(){
+        Ok(bp) => bp,
+        Err(_) => return,
+    };
+
+    if ball_position.0.x > half_window_width{
+        score_event_write.send(Scored(Scorer::Player2));
+    } else if ball_position.0.x < -half_window_width{
+        score_event_write.send(Scored(Scorer::Player1));
+    }
+}

@@ -59,6 +59,8 @@ fn main() {
 
     App::new()
         .add_plugins(DefaultPlugins.set(create_window()))
+        .init_resource::<Score>()
+        .add_event::<Scored>()
         .add_systems(
             Startup,
             (spawn_dotted_line, spawn_ball, spawn_paddles, spawn_camera, spawn_scoreboard),
@@ -72,6 +74,9 @@ fn main() {
                 move_player2_paddle,
                 move_paddles.after(move_player1_paddle),
                 handle_collisions.after(move_ball),
+                detect_scoring,
+                update_score.after(detect_scoring),
+                update_scoreboard.after(detect_scoring)         
             ),
         )
         .run();
