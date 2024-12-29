@@ -19,6 +19,15 @@ pub enum Scorer {
     Player2,
 }
 
+#[derive(Event)]
+pub struct Scored(pub Scorer); //this is used to create events indicating that a player has scored
+
+#[derive(Resource, Default)]
+pub struct Score {
+    pub player1: u32,
+    pub player2: u32,
+}
+
 #[derive(Component)]
 pub struct Ball;
 
@@ -26,22 +35,14 @@ pub struct Ball;
 pub struct Paddle;
 
 #[derive(Component)]
-pub struct Boundary;    //this is for the boundaries at the top and bottom of the screen that deflect the ball
+pub struct Boundary; //this is for the boundaries at the top and bottom of the screen that deflect the ball
 
 #[derive(Component)]
-pub struct Position(pub Vec2);    
+pub struct Shape(pub Vec2); //to store the size of an entity in 2d space
 
 #[derive(Component)]
-pub struct Velocity(pub Vec2);    
+pub struct Position(pub Vec2);
 
 #[derive(Component)]
-pub struct Shape(pub Vec2);    //to store the size of an entity in 2d space
+pub struct Velocity(pub Vec2);
 
-#[derive(Event)]
-pub struct Scored(pub Scorer);    //this is used to create events indicating that a player has scored
-
-#[derive(Resource, Default)]
-pub struct Score {
-    pub player1: u32,
-    pub player2: u32
-}

@@ -69,12 +69,13 @@ fn main() {
             Update,
             (
                 move_ball,
-                update_entity_positions.after(move_ball),
                 move_player1_paddle,
                 move_player2_paddle,
                 move_paddles.after(move_player1_paddle),
+                update_entity_positions.after(move_player1_paddle),
                 handle_collisions.after(move_ball),
                 detect_scoring,
+                respawn_ball.after(detect_scoring),
                 update_score.after(detect_scoring),
                 update_scoreboard.after(detect_scoring)         
             ),

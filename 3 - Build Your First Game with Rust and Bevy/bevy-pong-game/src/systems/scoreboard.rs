@@ -56,13 +56,9 @@ pub fn update_scoreboard(
     }
 }
 
-
-pub fn update_score(
-    mut score: ResMut<Score>,
-    mut events: EventReader<Scored>
-) {
-    for event in events.read(){
-        match event.0{
+pub fn update_score(mut score: ResMut<Score>, mut events: EventReader<Scored>) {
+    for event in events.read() {
+        match event.0 {
             Scorer::Player1 => score.player1 += 1,
             Scorer::Player2 => score.player2 += 1,
         }
