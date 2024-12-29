@@ -66,8 +66,12 @@ fn main() {
         .add_systems(
             Update,
             (
-                move_ball, 
-                update_entity_positions.after(move_ball)),
+                move_ball,
+                update_entity_positions.after(move_ball),
+                move_player1_paddle,
+                move_player2_paddle,
+                move_paddles,
+            ),
         )
         .run();
 }
