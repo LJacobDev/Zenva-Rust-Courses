@@ -3,3 +3,43 @@ This is about making a pong kind of game using Bevy which is an open source game
 
 I'm very interested in doing this as it would get me introduced to how to work with Bevy and how its paradigms work
 
+
+
+Things made in Bevy can run cross platform, win mac linux, web
+
+
+realtime rendering, good for graphics intensive applications
+
+
+
+
+I got up to the lesson about spawning the ball, and there is an issue where the line:
+
+use crate::BallBundle; is working on her code editor but is having a problem on mine
+
+I don't yet see what would be causing it but I seem to need to resolve that before it will work further
+
+I had to add 'mod bundles' into main.rs and then it stopped having a problem with it,
+but even then I still had to do it as use crate::bundles::BallBundle and not crate::BallBundle like she had in her thing
+
+For some reason her ball appears overtop of the dotted line, where this ball appears underneath it
+Also, a couple of things differ like the forementioned crate::BallBundle
+
+but I at least have things compiling and showing a dotted line and a ball, and I can come back to this and add paddles and movement and collisions
+
+... it seems like the ball does overlap the dotted line after all, when I changed it to size 8 it seems clear that it's overtop of the lines at the moment
+
+
+
+... the issue of there being crate::BallBundle vs crate::bundles::ballbundle etc doesn't appear anymore and I think it's because mod.rs has both a pub mod statement and a use crate statement in it and/or because main.rs had one or another of those added to it - I saw it happen but wasn't sure which exact piece had the effect
+
+
+SO ONE BUG THAT I DON'T YET UNDERSTAND BUT NOTICED:
+
+the paddles can collide / deflect with the ball when right centered to it, but I noticed that the ball is able to pass through the bottom side of the paddles, so I want to know more about where the collisions are being detected
+
+
+this is because a lot of things in this course were weird, like the instructor making the score text 'color:: YELLOW' in the video but then the next video showing that they were WHITE without explaining it (YELLOW doesn't exist as a possible colour, I was told by an error message)
+
+anyway I'm going to get the last 2 videos added in here so I at least kind of understand what the bevy engine works like and then I can move on to other things to build more skills sooner 
+
