@@ -75,8 +75,6 @@ pub fn spawn_boundary(
         let window_width = window.resolution.width();
         let window_height = window.resolution.height();
 
-        //I think the instructor has these flipped the wrong way around
-        //and that bottom_boundary should be the one with the positive value minus boundary height
         let top_boundary_y = window_height / 2. - BOUNDARY_HEIGHT / 2.;
         let bottom_boundary_y = -window_height / 2. + BOUNDARY_HEIGHT / 2.;
 
