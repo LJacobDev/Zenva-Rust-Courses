@@ -2,6 +2,10 @@ use crate::components::*;
 use bevy::math::bounding::{Aabb2d, BoundingCircle, BoundingVolume, IntersectsVolume};
 use bevy::prelude::*;
 
+use crate::constants::BOUNDARY_HEIGHT;
+use crate::BoundaryBundle;
+use bevy::sprite::MaterialMesh2dBundle;
+
 #[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub enum Collision {
     Left,
@@ -58,5 +62,49 @@ fn respond_to_collision(velocity: &mut Velocity, collision: Collision) {
     match collision {
         Collision::Left | Collision::Right => velocity.0.x *= -1.,
         Collision::Top | Collision::Bottom => velocity.0.y *= -1.,
+    }
+}
+
+pub fn spawn_boundary(
+    mut commands: Commands,
+    mut meshes: ResMut<Assets<Mesh>>,
+    mut materials: ResMut<Assets<ColorMaterial>>,
+    window_query: Query<&Window>,
+) {
+    if let Ok(window) = window_query.get_single() {
+        let window_width = window.resolution.width();
+        let window_height = window.resolution.height();
+
+        //I think the instructor has these flipped the wrong way around
+        //and that bottom_boundary should be the one with the positive value minus boundary height
+        let top_boundary_y = window_height / 2. - BOUNDARY_HEIGHT / 2.;
+        let bottom_boundary_y = -window_height / 2. + BOUNDARY_HEIGHT / 2.;
+
+        let top_boundary = BoundaryBundle::new(0., top_boundary_y, window_width);
+        let bottom_boundary = BoundaryBundle::new(0., bottom_boundary_y, window_width);
+
+        let mesh = Mesh::from(Rectangle::from_size(top_boundary.shape.0));
+        let material = ColorMaterial::from(Color::srgb(0., 0., 0.));
+
+        let mesh_handle = meshes.add(mesh);
+        let material_handle = materials.add(material);
+
+        commands.spawn((
+            top_boundary,
+            MaterialMesh2dBundle {
+                mesh: mesh_handle.clone().into(),
+                material: material_handle.clone(),
+                ..default()
+            },
+        ));
+
+        commands.spawn((
+            bottom_boundary,
+            MaterialMesh2dBundle {
+                mesh: mesh_handle.into(),
+                material: material_handle,
+                ..default()
+            },
+        ));
     }
 }

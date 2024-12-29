@@ -47,8 +47,7 @@ pub fn move_player1_paddle(
     mut paddle: Query<&mut Velocity, With<Player1>>,
 ) {
     if let Ok(mut velocity) = paddle.get_single_mut() {
-        if keyboard_input.pressed(KeyCode::ArrowUp)
-        {
+        if keyboard_input.pressed(KeyCode::ArrowUp) {
             velocity.0.y = 1.;
         } else if keyboard_input.pressed(KeyCode::ArrowDown) {
             velocity.0.y = -1.;

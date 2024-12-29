@@ -63,7 +63,14 @@ fn main() {
         .add_event::<Scored>()
         .add_systems(
             Startup,
-            (spawn_dotted_line, spawn_ball, spawn_paddles, spawn_camera, spawn_scoreboard),
+            (
+                spawn_dotted_line,
+                spawn_ball,
+                spawn_paddles,
+                spawn_camera,
+                spawn_scoreboard,
+                spawn_boundary,
+            ),
         )
         .add_systems(
             Update,
@@ -77,7 +84,7 @@ fn main() {
                 detect_scoring,
                 respawn_ball.after(detect_scoring),
                 update_score.after(detect_scoring),
-                update_scoreboard.after(detect_scoring)         
+                update_scoreboard.after(detect_scoring),
             ),
         )
         .run();
