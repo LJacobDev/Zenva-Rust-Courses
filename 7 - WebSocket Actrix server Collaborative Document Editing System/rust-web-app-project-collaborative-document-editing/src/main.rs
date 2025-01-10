@@ -26,4 +26,25 @@ async fn main() -> std::io::Result<()> {
 }
 
 
+// // this is supposed to be how to start one of these in actix 4.9.0
+   // but the other module files didn't work so I'll do the old way all through this project
+   // and then I can try remaking it later in actix 4.9.0 ways of doing it
 
+// use actix_files::Files;
+// use actix_web::{web, App, HttpServer, HttpResponse};
+
+// async fn index() -> HttpResponse {
+//     HttpResponse::Ok().body("Hello Wold!")
+// }
+
+// #[actix_web::main]
+// async fn main() -> std::io::Result<()> {
+//     HttpServer::new( || {
+//         App::new()
+//             .service(Files::new("/static", "./public"))
+//             .route("/", web::get().to(index))
+//     })
+//     .bind(("127.0.0.1", 8080))?
+//     .run()
+//     .await
+// }

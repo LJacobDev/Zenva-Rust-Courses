@@ -1,7 +1,6 @@
+use crate::ws_sess_manager::WsSessionManager;
 use actix::{Actor, Addr, AsyncContext, Handler, Message, Running, StreamHandler};
 use actix_web_actors::ws;
-use crate::ws_sess_manager::WsSessionManager;
-
 
 // -------------------------------------------------
 // Message Structs for WebSocket Events
@@ -10,13 +9,13 @@ use crate::ws_sess_manager::WsSessionManager;
 /// This message is used to notify the WsSessionManager when a new client connects
 /// addr - address of the WebSocket actor representing the connection
 #[derive(Message)]
-#[rtype(result="()")]
+#[rtype(result = "()")]
 pub struct Connect {
     pub(crate) addr: Addr<WebSocket>,
 }
 
 #[derive(Message)]
-#[rtype(result="()")]
+#[rtype(result = "()")]
 pub struct Disconnect {
     pub(crate) addr: Addr<WebSocket>,
 }
@@ -29,7 +28,7 @@ pub struct Disconnect {
 /// msg = the content that will be sent
 /// sender = the address of the WS actor that sent the message
 #[derive(Message, Clone)] // Clone is derived to allow easy duplicating of the message for broadcasting
-#[rtype(result="()")]
+#[rtype(result = "()")]
 pub struct BroadcastMessage {
     pub(crate) msg: String,
     pub(crate) sender: Addr<WebSocket>,
@@ -40,7 +39,7 @@ impl Handler<BroadcastMessage> for WebSocket {
 
     // the instructor says that this function sends the broadcast text to the intended client
     fn handle(&mut self, msg: BroadcastMessage, ctx: &mut Self::Context) {
-        ctx.text(mes.text);
+        ctx.text(msg.text);
     }
 }
 
@@ -55,26 +54,19 @@ impl Handler<DefaultMessage> for WebSocket {
 
     // the instructor says that this function sends the default text to the intended client
     fn handle(&mut self, msg: DefaultMessage, ctx: &mut Self::Context) {
-        ctx.text(mes.text);
+        ctx.text(msg.text);
     }
 }
 
-
-
 pub struct WebSocket {
-
     // Address of the websocket manager, which manages all of the websocket connections
     // it needs to implement the Actor trait so that it can be used as an Actix actor in the whole application
-    pub(crate) manager: Adds<WsSessionManager>,
-
+    pub(crate) manager: Addr<WsSessionManager>,
 }
 
-
 impl Actor for WebSocket {
-
     //defines the type of context used by the websocket actor
     type Context = ws::WebSocketContext<Self>;
-
 
     // handle the events of when the websocket connections are started / registered and stopped / unregistering the connection from the server
     fn started(&mut self, ctx: &mut Self::Context) {
@@ -87,7 +79,18 @@ impl Actor for WebSocket {
         self.manager.do_send(Disconnect {
             addr: ctx.address(),
         });
-        Running::Stop   // indicates to the actor that the runtime should stop
+        Running::Stop // indicates to the actor that the runtime should stop
     }
+}
 
+impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WebSocket {
+    fn handle(&mut self, msg: Result<ws::Message, ws::ProtocolError>, ctx: &mut Self::Context) {
+        // check if the message is a valid TEXT message
+        if let Ok(ws::Message::Text(text)) = msg {
+            self.manager.do_send(BroadcastMessage {
+                msg: text.to_string(),
+                sender: ctx.address(),
+            })
+        }
+    }
 }
