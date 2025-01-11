@@ -39,7 +39,7 @@ impl Handler<BroadcastMessage> for WebSocket {
 
     // the instructor says that this function sends the broadcast text to the intended client
     fn handle(&mut self, msg: BroadcastMessage, ctx: &mut Self::Context) {
-        ctx.text(msg.text);
+        ctx.text(msg.msg);
     }
 }
 
@@ -66,7 +66,7 @@ pub struct WebSocket {
 
 impl Actor for WebSocket {
     //defines the type of context used by the websocket actor
-    type Context = ws::WebSocketContext<Self>;
+    type Context = ws::WebsocketContext<Self>;
 
     // handle the events of when the websocket connections are started / registered and stopped / unregistering the connection from the server
     fn started(&mut self, ctx: &mut Self::Context) {
