@@ -90,7 +90,7 @@ use crate::actor::WebSocket;
 use crate::errors::ConnectionError;
 use crate::session_manager::WsSessionManager;
 use actix::prelude::*;
-use actix_web::{web, App, Error, HttpRequest, HttpResponse, HttpServer};
+use actix_web::{web, App, Data, Error, HttpRequest, HttpResponse, HttpServer};
 use actix_web_actors::ws;
 
 /// an async function that handles incoming websocket requests
@@ -138,7 +138,7 @@ async fn main() -> std::io::Result<()> {
             // share the Session Manager across the whole application
             // I'm not sure why it's cloning this if it's putting it in the app_data area
             // I'd have thought it would be able to move it directly into that, so I'd like to know more about this
-            .app_data(manager.clone())
+            .app_data(Data::new(manager.clone()))
     })
     .workers(1)
     .bind(address);
