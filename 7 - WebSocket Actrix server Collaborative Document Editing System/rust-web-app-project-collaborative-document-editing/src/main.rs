@@ -10,6 +10,7 @@
 
 mod session_manager;
 mod actor;
+mod errors;
 
 use actix_files::Files;
 use actix_web::{App, HttpServer};

@@ -33,7 +33,7 @@ impl Actor for WsSessionManager {
 impl Handler<Connect> for WsSessionManager {
     type Result = (); // no specific result is returned after handling the message
 
-    fn handle(&mut self, msg: Connext, _: &mut Context<Self>){
+    fn handle(&mut self, msg: Connect, _: &mut Context<Self>){
 
         println!("New Client Connected");
 
