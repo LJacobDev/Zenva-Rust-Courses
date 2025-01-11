@@ -28,8 +28,25 @@
       let last_delta = {};
 
       // create WebSocket instance/connection
+      let ws = new WebSocket("ws:://127.0.0.1:8080/ws/");
 
       // Handle WebSocket events
+
+      // when a connection opens, closes, you want to either show a message or append to the application log
+      ws.onopen = function (event) {
+        console.log("Connection opened");
+      };
+
+      ws.onclose = function (event) {
+        console.log("Connection closed");
+      };
+
+      //  print message, such as 'message from server: ' and update the html elements with the new data
+      //  The instructor wrote this at first, only to comment it out and then redo the ws.onmessage further down
+      //   ws.onmessage = function (event) {
+      //     console.log("Message from server", event.data);
+      //     document.getElementById("editor").innerHTML = event.data;
+      //   };
 
       // Create QuillJS instance
       const quill = new Quill("#editor", {
@@ -39,6 +56,11 @@
         },
       });
 
+      /*
+      Go here to see more capabilities of Quill.js, like working with a keyboard, history, clipboard:
+      https://quilljs.com/docs/quickstart
+      */
+
       const toolbarOptions = [
         ["bold", "italic", "underline", "strike"],
         ["blockquote", "code-block"],
@@ -46,6 +68,49 @@
       ];
 
       // Set handling functions for the text-change event (QuillJS)
+
+      quill.on("text-change", (delta, oldDelta, source) => {
+        last_update = Date.now();
+        last_delta = delta;
+
+        let obj = {
+          time: last_update,
+          delta: delta,
+        };
+
+        if (source == "user") {
+          const objJson = JSON.stringify(obj);
+
+          console.log(objJson);
+          ws.send(objJson);
+        }
+      });
+
+      ws.onmessage = function (event) {
+        try {
+          console.log("Event from server: ", event.data);
+          let obj = JSON.parse(event.data);
+
+          let time = obj.time;
+          let delta = obj.delta;
+
+          if (last_delta < time) {
+            // server update is newer, apply directly
+            quill.updateContents(delta);
+          } else if (last_update > time) {
+            console.warn(
+              "Received server update with unexpected update time that is greater than current time"
+            );
+          }
+
+          // ensure that local time is in sync or ahead
+          last_update = Math.max(last_update, time);
+        } catch (error) {
+          console.error("Error handling message: ", error);
+          // optionally, notify user about the change conflicts
+          // close websocket and reopen it
+        }
+      };
     </script>
   </body>
 
