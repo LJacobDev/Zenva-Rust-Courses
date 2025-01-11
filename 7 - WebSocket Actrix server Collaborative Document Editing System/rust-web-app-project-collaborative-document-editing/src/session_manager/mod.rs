@@ -1,4 +1,4 @@
-use crate::ws_actor::{BroadcastMessage, Connect, Disconnect, WebSocket};
+use crate::actor::{BroadcastMessage, Connect, Disconnect, WebSocket};   //he changed it from ws_actor to actor in lesson 12 but didn't explain anything about why
 use actix::{Actor, Addr, Context, Handler};
 use std::{collections::HashSet, hash::Hash};
 

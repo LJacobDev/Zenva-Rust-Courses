@@ -1,4 +1,4 @@
-use crate::ws_sess_manager::WsSessionManager;
+use crate::sess_manager::WsSessionManager;  //he just changed it from ws_session_manager to session_manager in lesson 12 with no explanation as to why, but I think it was just him correcting his error because session_manager::WsSessionManager makes sense where the other one did not
 use actix::{Actor, Addr, AsyncContext, Handler, Message, Running, StreamHandler};
 use actix_web_actors::ws;
 
