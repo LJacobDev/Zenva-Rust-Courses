@@ -10,7 +10,7 @@
       rel="stylesheet"
     />
 
-    <!-- get the  javascript for quill.js over cdn -->
+    <!-- get the  javascript library for quill.js over cdn -->
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
   </head>
 
@@ -34,7 +34,16 @@
       // Create QuillJS instance
       const quill = new Quill("#editor", {
         theme: "snow",
+        modules: {
+          toolbar: toolbarOptions,
+        },
       });
+
+      const toolbarOptions = [
+        ["bold", "italic", "underline", "strike"],
+        ["blockquote", "code-block"],
+        ["link", "image", "video", "formula"],
+      ];
 
       // Set handling functions for the text-change event (QuillJS)
     </script>
