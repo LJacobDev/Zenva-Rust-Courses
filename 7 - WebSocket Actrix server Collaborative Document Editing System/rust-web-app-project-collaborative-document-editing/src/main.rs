@@ -124,6 +124,7 @@ async fn main() -> std::io::Result<()> {
     let manager = WsSessionManager::new().start();
 
     // provide the main address for the web application
+    // 0.0.0.0 listens not only to localhost, but also to public IP address incoming traffic, and virtual private network traffic, and Ethernet / Wifi connected device requests too
     let address = "0.0.0.0:8080";
 
     // create the Actix application that uses an HttpServer

@@ -1,68 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Collaborative Document Editing System - Rust</title>
 
+    <!-- get the snow theme for quill.js -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css"
+      rel="stylesheet"
+    />
 
-</head>
+    <!-- get the  javascript for quill.js over cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+  </head>
 
-<body>
-
+  <body>
     <header>
-        <div class="banner">
-            <h1>Zenva Academy</h1>
-        </div>
+      <div class="banner">
+        <h1>Zenva Academy</h1>
+      </div>
     </header>
 
-    <div id="editor">
-    </div>
+    <div id="editor"></div>
 
     <script>
+      let last_update = 0;
+      let last_delta = {};
 
-        let last_update = 0;
-        let last_delta = {}
+      // create WebSocket instance/connection
 
-        // create WebSocket instance/connection
+      // Handle WebSocket events
 
+      // Create QuillJS instance
+      const quill = new Quill("#editor", {
+        theme: "snow",
+      });
 
-        // Handle WebSocket events
-
-
-        // Create QuillJS instance
-
-
-        // Set handling functions for the text-change event (QuillJS)
+      // Set handling functions for the text-change event (QuillJS)
     </script>
+  </body>
 
-</body>
-
-<style>
+  <style>
     body {
-        margin: 0;
-        font-family: Arial, sans-serif;
+      margin: 0;
+      font-family: Arial, sans-serif;
     }
 
     header {
-        background-size: cover;
-        background-position: center;
-        color: white;
-        text-align: center;
-        padding: 50px 0;
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 50px 0;
     }
 
     .banner h1 {
-        font-size: 48px;
-        margin: 0;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      font-size: 48px;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     }
 
     #editor {
-        width: 80%; /* Or a specific pixel width */
-        margin: 0 auto;
+      width: 80%; /* Or a specific pixel width */
+      margin: 0 auto;
     }
-
-</style>
-
+  </style>
 </html>
