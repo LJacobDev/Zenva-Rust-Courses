@@ -142,4 +142,15 @@ async fn main() -> std::io::Result<()> {
     .workers(1)
     .bind(address);
 
+    // this server needs to be checked in a match statement for either an Ok(server) or Err()
+    match server {
+        Ok(srv) => {
+            println!("Server is listening on: {}", address);
+            srv.run().await
+        },
+        Err(error) => {
+            panic!("{}", ConnectionError::CreateServerError(error.to_string()))
+        }
+    }
+
 }
